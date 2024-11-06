@@ -35,4 +35,12 @@ public class BoardService {
                 .map(BoardEntity::asDto)
                 .getContent();
     }
+
+    public List<BoardDto> getAllBoardsWithPk(long id){
+        return boardRepository
+                .findAllWithPK(id)
+                .stream()
+                .map(BoardEntity::asDto)
+                .toList();
+    }
 }

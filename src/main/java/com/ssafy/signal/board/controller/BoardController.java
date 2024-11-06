@@ -30,5 +30,8 @@ public class BoardController {
         return boardService.getAllBoards(page,size);
     }
 
-
+    @GetMapping("/boards/all/pk")
+    public List<BoardDto> getAllBoardsPk(@RequestParam long boardId) {
+        return boardService.getAllBoardsWithPk(boardId);
+    }
 }

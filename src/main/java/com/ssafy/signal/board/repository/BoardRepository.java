@@ -10,5 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
-
+    @Query("select b from BoardEntity b where b.boardId > :id")
+    List<BoardEntity> findAllWithPK(@Param("id") long boardId);
 }
