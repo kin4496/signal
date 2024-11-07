@@ -7,7 +7,7 @@ import lombok.Getter;
 @Data
 @Builder
 public class BoardDto {
-    private long boardId;
+    private Long boardId;
 
     private String title;
     private String content;

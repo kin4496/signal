@@ -1,6 +1,7 @@
 package com.ssafy.signal.board.controller;
 
 import com.ssafy.signal.board.domain.BoardDto;
+import com.ssafy.signal.board.domain.BoardLikeDto;
 import com.ssafy.signal.board.repository.BoardRepository;
 import com.ssafy.signal.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class BoardController {
 
     @PostMapping("/boards")
     public BoardDto createBoard(@RequestBody BoardDto board) {
-        return board;
+        return boardService.createBoard(board);
     }
 
     @GetMapping("/boards/{id}")
@@ -33,5 +34,20 @@ public class BoardController {
     @GetMapping("/boards/all/pk")
     public List<BoardDto> getAllBoardsPk(@RequestParam long boardId) {
         return boardService.getAllBoardsWithPk(boardId);
+    }
+
+    @PostMapping("/boards/like/toggle")
+    public void toggleBoardLike(@RequestBody BoardLikeDto boardLikeDto) {
+        boardService.toggleLike(boardLikeDto);
+    }
+
+    @GetMapping("boards/{id}/like")
+    public long getBoardLike(@PathVariable long id) {
+        return boardService.getBoardLike(id);
+    }
+
+    @GetMapping("boards/top")
+    public List<BoardDto> getTopBoards() {
+        return boardService.getTop10BoardList();
     }
 }
