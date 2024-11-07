@@ -1,9 +1,9 @@
 package com.ssafy.signal.board.domain;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Builder
 public class BoardDto {

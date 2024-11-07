@@ -2,6 +2,7 @@ package com.ssafy.signal.board.controller;
 
 import com.ssafy.signal.board.domain.BoardDto;
 import com.ssafy.signal.board.domain.BoardLikeDto;
+import com.ssafy.signal.board.domain.Top10Boards;
 import com.ssafy.signal.board.repository.BoardRepository;
 import com.ssafy.signal.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +48,7 @@ public class BoardController {
     }
 
     @GetMapping("boards/top")
-    public List<BoardDto> getTopBoards() {
+    public Top10Boards getTopBoards() {
         return boardService.getTop10BoardList();
     }
 }

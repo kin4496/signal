@@ -1,15 +1,13 @@
 package com.ssafy.signal.board.service;
 
-import com.ssafy.signal.board.domain.BoardDto;
-import com.ssafy.signal.board.domain.BoardEntity;
-import com.ssafy.signal.board.domain.BoardLikeDto;
-import com.ssafy.signal.board.domain.BoardLikeEntity;
+import com.ssafy.signal.board.domain.*;
 import com.ssafy.signal.board.repository.BoardLikeRepository;
 import com.ssafy.signal.board.repository.BoardRepository;
 import com.ssafy.signal.user.domain.UserEntity;
 import com.ssafy.signal.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -79,11 +77,12 @@ public class BoardService {
         return boardLikeRepository.countByBoard(board);
     }
 
-    public List<BoardDto> getTop10BoardList(){
-        return boardLikeRepository
-                .findTop10BoardsByLikes()
-                .stream()
-                .map(BoardEntity::asDto)
-                .toList();
+    @Cacheable(cacheNames = "getTop10BoardList",key = "'boards:top10'",cacheManager = "boardCacheManager")
+    public Top10Boards getTop10BoardList(){
+        return new Top10Boards(boardLikeRepository
+                        .findTop10BoardsByLikes()
+                        .stream()
+                        .map(BoardEntity::asDto)
+                        .toList());
     }
 }
