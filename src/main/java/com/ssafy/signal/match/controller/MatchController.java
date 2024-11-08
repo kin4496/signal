@@ -23,4 +23,15 @@ public class MatchController {
     public List<NearUser> nearMatch(@RequestParam Double lat, @RequestParam Double lon) {
         return matchService.getNearUser(lat,lon);
     }
+
+    @GetMapping("/match/test")
+    public void insertTestInfoRedis()
+    {
+        matchService.insertTestInfoRedis();
+    }
+
+    @GetMapping("/match/near/redis")
+    public List<NearUser> getNearUserWithRedis(@RequestParam Double lat,@RequestParam Double lon){
+        return matchService.getNearUserWithRedis(lat,lon);
+    }
 }
